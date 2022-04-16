@@ -11,6 +11,12 @@
 
 
 
+
+# 设置首次登录后台密码为空（进入openwrt后自行修改密码）
+# sed -i '/CYXluq4wUazHjmCDBCqXF/d' $ZZZ_PATH
+
+#sed -i 's/PATCHVER:=5.15/PATCHVER:=5.10/g' target/linux/x86/Makefile  #x86机型,默认内核5.15，修改内核5.10（去掉sed前面的#生效）
+
 echo '修改upnp绑定文件位置'
 sed -i 's/\/var\/upnp.leases/\/tmp\/upnp.leases/g' feeds/packages/net/miniupnpd/files/upnpd.config
 cat feeds/packages/net/miniupnpd/files/upnpd.config |grep upnp_lease_file
@@ -33,16 +39,20 @@ sed -i 's/"KMS 服务器"/"KMS激活"/g' `grep "KMS 服务器" -rl ./`
 sed -i 's/"USB 打印服务器"/"打印服务"/g' `grep "USB 打印服务器" -rl ./`
 sed -i 's/"Turbo ACC 网络加速"/"网络加速"/g' `grep "Turbo ACC 网络加速" -rl ./`
 
+sed -i '/to-ports 53/d' $ZZZ_PATH
+
+sed -i "/exit 0/i\sed -i '/coremark/d' /etc/crontabs/root" "$BASE_PATH/etc/rc.local"
+
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
 sed -i 's/luci-theme-bootstrap/luci-theme-neobird/g' feeds/luci/collections/luci/Makefile 
+
+sed -i "/exit 0/i\uci set luci.main.mediaurlbase='/luci-static/neobird' && uci commit luci" "$BASE_PATH/etc/rc.local" 
 
 sed -i 's|^TARGET_|# TARGET_|g; s|# TARGET_DEVICES += phicomm_k3|TARGET_DEVICES += phicomm_k3|' target/linux/bcm53xx/image/Makefile
 
 mkdir -p files/etc/hotplug.d/block && curl -fsSL https://raw.githubusercontent.com/281677160/openwrt-package/usb/block/10-mount > files/etc/hotplug.d/block/10-mount
 
-
-#sed -i 's/PATCHVER:=5.15/PATCHVER:=5.10/g' target/linux/x86/Makefile  #x86机型,默认内核5.15，修改内核5.10（去掉sed前面的#生效）
 
 # 在线更新时，删除不想保留固件的某个文件，在EOF跟EOF之间加入删除代码，记住这里对应的是固件的文件路径，比如： rm /etc/config/luci
 cat >$DELETE <<-EOF
