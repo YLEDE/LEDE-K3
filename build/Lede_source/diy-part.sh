@@ -47,7 +47,7 @@ sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generat
 
 sed -i 's/luci-theme-bootstrap/luci-theme-neobird/g' feeds/luci/collections/luci/Makefile 
 
-sed -i "/exit 0/i\uci set luci.main.mediaurlbase='/luci-static/neobird' && uci commit luci" "$BASE_PATH/etc/rc.local" 
+sed -i "/exit 0/i\uci set luci.main.mediaurlbase='/luci-static/Neobird' && uci commit luci" "$BASE_PATH/etc/rc.local" 
 
 sed -i 's|^TARGET_|# TARGET_|g; s|# TARGET_DEVICES += phicomm_k3|TARGET_DEVICES += phicomm_k3|' target/linux/bcm53xx/image/Makefile
 
