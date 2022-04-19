@@ -51,7 +51,7 @@ sed -i "/exit 0/i\uci set luci.main.mediaurlbase='/luci-static/Neobird' && uci c
 
 sed -i 's|^TARGET_|# TARGET_|g; s|# TARGET_DEVICES += phicomm_k3|TARGET_DEVICES += phicomm_k3|' target/linux/bcm53xx/image/Makefile
 
-mkdir -p files/etc/hotplug.d/block && curl -fsSL https://raw.githubusercontent.com/RLEDE/target/main/10-mount > files/etc/hotplug.d/block/10-mount
+mkdir -p files/etc/hotplug.d/block && curl -fsSL https://raw.githubusercontent.com/YLEDE/target/main/10-mount > files/etc/hotplug.d/block/10-mount
 
 
 # 在线更新时，删除不想保留固件的某个文件，在EOF跟EOF之间加入删除代码，记住这里对应的是固件的文件路径，比如： rm /etc/config/luci
