@@ -30,7 +30,7 @@ echo '=========Alert hostname OK!========='
 
 
 echo '替换K3的无线驱动'
-wget -nv https://github.com/RLEDE/target/raw/main/brcmfmac4366c-pcie.bin -O package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
+wget -nv https://github.com/PuXiongfei/brcmfmac4366c/releases/download/FW_RT_AC88U_300438648260/brcmfmac4366c-pcie.bin -O package/lean/k3-brcmfmac4366c-firmware/files/lib/firmware/brcm/brcmfmac4366c-pcie.bin
 echo '=========Replace k3wifi OK!========='
 
 
